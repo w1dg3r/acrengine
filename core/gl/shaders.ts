@@ -55,6 +55,7 @@ export class shaders {
         return shader;
     }
 
+    /* Link shaders */
     private createProgram(vertexShader: WebGLShader, fragmentShader:WebGLShader): void {
         this._program = gl.createProgram();
 
