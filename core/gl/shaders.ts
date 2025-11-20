@@ -13,7 +13,7 @@ export class shaders {
      * @param vertexPath The source of the vertexpath shader
      * @param fragmentPath The source of the fragmentpath shader
      */
-    public constructor(name: string, vertexPath: string, fragmentPath : string) {
+    public constructor(name: string, vertexPath: string, fragmentPath: string) {
         this._name = name;
         let vertexShader = this.loadShader(vertexPath, gl.VERTEX_SHADER);
         let fragmentShader = this.loadShader(fragmentPath, gl.FRAGMENT_SHADER);
@@ -31,8 +31,22 @@ export class shaders {
     /**
      * Use this shader loaded in program
      */
-    public use():void {
+    public use(): void {
         gl.useProgram(this._program);
+    }
+
+    public getAttributeLocation(name: string): number {
+        if (this._program === undefined) {
+            throw new Error("Shader program not created yet.");
+        }
+        return gl.getAttribLocation(this._program, name);
+    }
+
+    public getUniformLocation(name: string): WebGLUniformLocation {
+        if (this._program === undefined) {
+            throw new Error("Shader program not created yet.");
+        }
+        return gl.getUniformLocation(this._program, name);
     }
 
     /**
@@ -41,7 +55,7 @@ export class shaders {
      * @param shaderType 
      * @returns 
      */
-    private loadShader(source: string, shaderType: number) : WebGLShader {
+    private loadShader(source: string, shaderType: number): WebGLShader {
         //Make a webglshader
         let shader: WebGLShader = gl.createShader(shaderType);
 
@@ -56,7 +70,7 @@ export class shaders {
     }
 
     /* Link shaders */
-    private createProgram(vertexShader: WebGLShader, fragmentShader:WebGLShader): void {
+    private createProgram(vertexShader: WebGLShader, fragmentShader: WebGLShader): void {
         this._program = gl.createProgram();
 
         gl.attachShader(this._program, vertexShader);

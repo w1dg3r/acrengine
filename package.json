@@ -4,12 +4,13 @@
   "description": "A 2D engine in typescript",
   "main": "src/app.ts",
   "scripts": {
-    "build": "npx tsc",
+    "build": "tsc",
+    "start": "npx http-server .",
     "clean": "rm -rf out",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "type":"module",
+  "type": "module",
   "license": "ISC",
   "devDependencies": {
     "ts-node": "^9.1.1",
